@@ -1,0 +1,33 @@
+{
+  "name": "barsignal-catalog",
+  "version": "1.0.0",
+  "description": "BarSignal cocktail catalog validation and management tools",
+  "main": "index.js",
+  "scripts": {
+    "validate": "tsx scripts/validate-catalog.ts",
+    "validate:strict": "cross-env VALIDATE_IMAGE_FILES=true tsx scripts/validate-catalog.ts",
+    "build": "tsc",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "cross-env": "^10.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/automationinferno/BarSignal-catalog.git"
+  },
+  "keywords": [
+    "cocktails",
+    "drinks",
+    "catalog",
+    "validation"
+  ],
+  "author": "automationinferno",
+  "license": "MIT"
+}

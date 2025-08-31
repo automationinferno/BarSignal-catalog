@@ -1,0 +1,28 @@
+name: build-thumbs
+on: [push]
+jobs:
+  thumbs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm i sharp
+      - name: Generate thumbnails
+        run: |
+          node -e "
+          const fs=require('fs'),path=require('path'),sharp=require('sharp');
+          const src='drinks', out=path.join(src,'_thumbs');
+          fs.mkdirSync(out,{recursive:true});
+          for(const f of fs.readdirSync(src)){
+            if(!/\.(png|jpg|jpeg|webp)$/i.test(f)) continue;
+            const base=f.replace(/\.[^.]+$/,'');
+            sharp(path.join(src,f)).resize({width:512, withoutEnlargement:true}).toFile(path.join(out, base+'_512.png'));
+            sharp(path.join(src,f)).resize({width:1024, withoutEnlargement:true}).toFile(path.join(out, base+'_1024.png'));
+          }"
+      - name: Commit thumbnails
+        run: |
+          git config user.name "gh-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || (git commit -m "Build thumbs" && git push)
