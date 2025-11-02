@@ -7,11 +7,14 @@
     "validate": "tsx scripts/validate-catalog.ts",
     "validate:strict": "cross-env VALIDATE_IMAGE_FILES=true tsx scripts/validate-catalog.ts",
     "build": "tsc",
-    "type-check": "tsc --noEmit"
+  "type-check": "tsc --noEmit",
+  "thumbs": "node scripts/generate-thumbs.js",
+  "placeholders": "node scripts/generate-placeholders.js"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "cross-env": "^10.0.0",
+  "sharp": "^0.33.0",
     "tsx": "^4.0.0",
     "typescript": "^5.0.0"
   },
