@@ -4,10 +4,40 @@
     "name": "Old Fashioned",
     "category": "Classic",
     "popularity": 95,
+    "aliases": ["Whisky Old Fashioned"],
+    "modifiersSupported": ["no_ice", "double"],
+    "ingredients": [
+      { "name": "Bourbon or Rye", "amount": 60, "unit": "ml" },
+      { "name": "Simple Syrup", "amount": 7.5, "unit": "ml" },
+      { "name": "Angostura Bitters", "amount": 2, "unit": "dashes" }
+    ],
+    "technique": "build",
+    "glass": "rocks",
+    "ice": "cubed",
+    "garnish": [{ "name": "Orange peel", "prep": "express oils, rim the glass" }],
+    "rim": null,
+    "steps": [
+      "Add syrup and bitters to a rocks glass.",
+      "Add whiskey and ice.",
+      "Stir briefly and garnish."
+    ],
+    "totalVolumeMl": 70,
+    "estimatedAbvPercent": 32,
+    "calories": 180,
+    "strength": "high",
+    "difficulty": "easy",
+    "prepTimeSec": 60,
+    "tags": ["whiskey", "spirit-forward", "classic"],
+    "origin": { "country": "USA", "city": "Louisville", "year": 1880, "creator": null },
+    "sources": ["https://iba-world.com/old-fashioned"],
+    "relatedDrinkIds": ["whiskey_sour", "sazerac"],
+    "isIBAOfficial": true,
+    "isMocktail": false,
     "imagePath": "drinks/old_fashioned.png",
     "imageVariants": {
       "512": "drinks/_thumbs/old_fashioned_512.png",
-      "1024": "drinks/_thumbs/old_fashioned_1024.png"
+      "1024": "drinks/_thumbs/old_fashioned_1024.png",
+      "thumb": "drinks/_thumbs/old_fashioned_512.png"
     }
   },
   {
@@ -15,10 +45,40 @@
     "name": "Manhattan",
     "category": "Classic",
     "popularity": 92,
+    "aliases": [],
+    "modifiersSupported": ["no_cherry"],
+    "ingredients": [
+      { "name": "Rye Whiskey", "amount": 60, "unit": "ml" },
+      { "name": "Sweet Vermouth", "amount": 30, "unit": "ml" },
+      { "name": "Angostura Bitters", "amount": 2, "unit": "dashes" }
+    ],
+    "technique": "stir",
+    "glass": "coupe",
+    "ice": "none",
+    "garnish": [{ "name": "Brandied cherry" }],
+    "rim": null,
+    "steps": [
+      "Add all ingredients to a mixing glass with ice.",
+      "Stir until well chilled.",
+      "Strain into a chilled coupe and garnish."
+    ],
+    "totalVolumeMl": 90,
+    "estimatedAbvPercent": 28,
+    "calories": 190,
+    "strength": "high",
+    "difficulty": "easy",
+    "prepTimeSec": 90,
+    "tags": ["rye", "vermouth", "classic"],
+    "origin": { "country": "USA", "city": "New York", "year": 1880, "creator": null },
+    "sources": ["https://iba-world.com/manhattan"],
+    "relatedDrinkIds": ["rob_roy", "old_fashioned"],
+    "isIBAOfficial": true,
+    "isMocktail": false,
     "imagePath": "drinks/manhattan.png",
     "imageVariants": {
       "512": "drinks/_thumbs/manhattan_512.png",
-      "1024": "drinks/_thumbs/manhattan_1024.png"
+      "1024": "drinks/_thumbs/manhattan_1024.png",
+      "thumb": "drinks/_thumbs/manhattan_512.png"
     }
   },
   {
@@ -26,10 +86,41 @@
     "name": "Martini",
     "category": "Classic",
     "popularity": 98,
+    "aliases": ["Dry Martini"],
+    "modifiersSupported": true,
+    "ingredients": [
+      { "name": "Gin", "amount": 60, "unit": "ml" },
+      { "name": "Dry Vermouth", "amount": 10, "unit": "ml" },
+      { "name": "Orange Bitters", "amount": 1, "unit": "dash", "optional": true }
+    ],
+    "technique": "stir",
+    "glass": "martini",
+    "ice": "none",
+    "garnish": [{ "name": "Lemon twist", "prep": "express oils over the drink" }],
+    "rim": null,
+    "steps": [
+      "Add all ingredients to a mixing glass with ice.",
+      "Stir until well chilled.",
+      "Strain into a chilled martini glass.",
+      "Garnish with a lemon twist."
+    ],
+    "totalVolumeMl": 70,
+    "estimatedAbvPercent": 31,
+    "calories": 180,
+    "strength": "high",
+    "difficulty": "easy",
+    "prepTimeSec": 90,
+    "tags": ["boozy", "spirit-forward", "citrus", "classic"],
+    "origin": { "country": "USA", "city": "New York", "year": 1910, "creator": null },
+    "sources": ["https://iba-world.com/martini"],
+    "relatedDrinkIds": ["vodka_martini", "gibson"],
+    "isIBAOfficial": true,
+    "isMocktail": false,
     "imagePath": "drinks/martini.png",
     "imageVariants": {
       "512": "drinks/_thumbs/martini_512.png",
-      "1024": "drinks/_thumbs/martini_1024.png"
+      "1024": "drinks/_thumbs/martini_1024.png",
+      "thumb": "drinks/_thumbs/martini_512.png"
     }
   },
   {
@@ -37,10 +128,42 @@
     "name": "Mojito",
     "category": "Classic",
     "popularity": 94,
+    "aliases": [],
+    "modifiersSupported": ["no_mint", "less_sugar"],
+    "ingredients": [
+      { "name": "White Rum", "amount": 50, "unit": "ml" },
+      { "name": "Fresh Lime Juice", "amount": 25, "unit": "ml" },
+      { "name": "Simple Syrup", "amount": 15, "unit": "ml" },
+      { "name": "Mint Leaves", "amount": 8, "unit": "leaves" },
+      { "name": "Soda Water", "amount": 60, "unit": "ml" }
+    ],
+    "technique": "build",
+    "glass": "highball",
+    "ice": "crushed",
+    "garnish": [{ "name": "Mint sprig" }, { "name": "Lime wheel" }],
+    "rim": null,
+    "steps": [
+      "Gently muddle mint with syrup and lime juice in a highball.",
+      "Add rum and crushed ice, top with soda.",
+      "Stir lightly and garnish."
+    ],
+    "totalVolumeMl": 150,
+    "estimatedAbvPercent": 10,
+    "calories": 170,
+    "strength": "low",
+    "difficulty": "easy",
+    "prepTimeSec": 120,
+    "tags": ["refreshing", "mint", "citrus"],
+    "origin": { "country": "Cuba", "city": "Havana", "year": 1900, "creator": null },
+    "sources": ["https://iba-world.com/mojito"],
+    "relatedDrinkIds": ["daiquiri", "caipirinha"],
+    "isIBAOfficial": true,
+    "isMocktail": false,
     "imagePath": "drinks/mojito.png",
     "imageVariants": {
       "512": "drinks/_thumbs/mojito_512.png",
-      "1024": "drinks/_thumbs/mojito_1024.png"
+      "1024": "drinks/_thumbs/mojito_1024.png",
+      "thumb": "drinks/_thumbs/mojito_512.png"
     }
   },
   {
@@ -48,10 +171,40 @@
     "name": "Margarita",
     "category": "Classic",
     "popularity": 96,
+    "aliases": ["Marg"],
+    "modifiersSupported": ["no_salt", "frozen"],
+    "ingredients": [
+      { "name": "Tequila", "amount": 50, "unit": "ml" },
+      { "name": "Triple Sec", "amount": 20, "unit": "ml" },
+      { "name": "Fresh Lime Juice", "amount": 25, "unit": "ml" }
+    ],
+    "technique": "shake",
+    "glass": "coupe",
+    "ice": "none",
+    "garnish": [{ "name": "Salt rim" }, { "name": "Lime wheel" }],
+    "rim": "salt",
+    "steps": [
+      "Shake all ingredients with ice.",
+      "Strain into a chilled, salt-rimmed glass.",
+      "Garnish with a lime wheel."
+    ],
+    "totalVolumeMl": 95,
+    "estimatedAbvPercent": 20,
+    "calories": 200,
+    "strength": "medium",
+    "difficulty": "easy",
+    "prepTimeSec": 120,
+    "tags": ["citrus", "tequila", "classic"],
+    "origin": { "country": "Mexico", "city": null, "year": 1938, "creator": null },
+    "sources": ["https://iba-world.com/margarita"],
+    "relatedDrinkIds": ["paloma", "daiquiri"],
+    "isIBAOfficial": true,
+    "isMocktail": false,
     "imagePath": "drinks/margarita.png",
     "imageVariants": {
       "512": "drinks/_thumbs/margarita_512.png",
-      "1024": "drinks/_thumbs/margarita_1024.png"
+      "1024": "drinks/_thumbs/margarita_1024.png",
+      "thumb": "drinks/_thumbs/margarita_512.png"
     }
   }
 ]

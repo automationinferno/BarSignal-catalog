@@ -13,7 +13,30 @@ interface DrinkEntry {
   imageVariants: {
     [key: string]: string;
   };
-  modifiersSupported?: string[];
+  // allow boolean or array for flexibility
+  modifiersSupported?: boolean | string[];
+  ingredients?: Array<{ name: string; amount?: number; unit?: string; optional?: boolean }>;
+  technique?: string;
+  glass?: string;
+  ice?: string | null;
+  garnish?: Array<{ name: string; prep?: string }>;
+  rim?: string | null;
+  steps?: string[];
+  totalVolumeMl?: number;
+  estimatedAbvPercent?: number;
+  calories?: number;
+  strength?: string;
+  difficulty?: string;
+  prepTimeSec?: number;
+  tags?: string[];
+  origin?: { country?: string; city?: string | null; year?: number | null; creator?: string | null };
+  sources?: string[];
+  relatedDrinkIds?: string[];
+  isIBAOfficial?: boolean;
+  isMocktail?: boolean;
+  themeColor?: string;
+  accentColor?: string;
+  dominantColors?: string[];
 }
 
 interface ValidationResult {
@@ -172,6 +195,7 @@ function validateCatalog(): ValidationResult {
       const mdPath = drink.imageVariants['md'];
       const v512 = drink.imageVariants['512'];
       const v1024 = drink.imageVariants['1024'];
+      const thumb = drink.imageVariants['thumb'];
       if (smPath && smPath !== expected512) {
         result.warnings?.push(`${drinkPrefix} (${drink.id || 'unknown id'}): sm path should be ${expected512}`);
       }
@@ -184,12 +208,136 @@ function validateCatalog(): ValidationResult {
       if (v1024 && v1024 !== expected1024) {
         result.warnings?.push(`${drinkPrefix} (${drink.id || 'unknown id'}): 1024 path should be ${expected1024}`);
       }
+      if (thumb && !thumb.startsWith('drinks/_thumbs/')) {
+        result.warnings?.push(`${drinkPrefix} (${drink.id || 'unknown id'}): thumb should be under drinks/_thumbs/`);
+      }
     }
 
     // Validate modifiersSupported (optional)
-    if (drink.modifiersSupported) {
-      if (!Array.isArray(drink.modifiersSupported) || !drink.modifiersSupported.every(m => typeof m === 'string')) {
-        result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): modifiersSupported must be an array of strings if provided`);
+    if (typeof drink.modifiersSupported !== 'undefined') {
+      const ms: any = drink.modifiersSupported;
+      if (typeof ms !== 'boolean' && !(Array.isArray(ms) && ms.every((m: any) => typeof m === 'string'))) {
+        result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): modifiersSupported must be boolean or an array of strings`);
+        result.success = false;
+      }
+    }
+
+    // Validate ingredients (optional)
+    if (typeof drink.ingredients !== 'undefined') {
+      if (!Array.isArray(drink.ingredients)) {
+        result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): ingredients must be an array`);
+        result.success = false;
+      } else {
+        drink.ingredients.forEach((ing, ii) => {
+          if (!ing || typeof ing.name !== 'string' || !ing.name.trim()) {
+            result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): ingredients[${ii}].name must be a non-empty string`);
+            result.success = false;
+          }
+          if (typeof ing.amount !== 'undefined' && (typeof ing.amount !== 'number' || !isFinite(ing.amount) || ing.amount < 0)) {
+            result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): ingredients[${ii}].amount must be a non-negative number`);
+            result.success = false;
+          }
+          if (typeof ing.unit !== 'undefined' && typeof ing.unit !== 'string') {
+            result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): ingredients[${ii}].unit must be a string`);
+            result.success = false;
+          }
+          if (typeof ing.optional !== 'undefined' && typeof ing.optional !== 'boolean') {
+            result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): ingredients[${ii}].optional must be a boolean`);
+            result.success = false;
+          }
+        });
+      }
+    }
+
+    // Validate steps (optional)
+    if (typeof drink.steps !== 'undefined') {
+      if (!Array.isArray(drink.steps) || !drink.steps.every(s => typeof s === 'string' && s.trim())) {
+        result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): steps must be an array of non-empty strings`);
+        result.success = false;
+      }
+    }
+
+    // Simple type checks for other optional fields
+    const optString: Array<keyof DrinkEntry> = ['technique','glass','ice','rim','strength','difficulty','themeColor','accentColor'];
+    optString.forEach(key => {
+      const v: any = (drink as any)[key];
+      if (typeof v !== 'undefined' && v !== null && typeof v !== 'string') {
+        result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): ${String(key)} must be a string or null`);
+        result.success = false;
+      }
+    });
+    const optNumber: Array<keyof DrinkEntry> = ['totalVolumeMl','estimatedAbvPercent','calories','prepTimeSec'];
+    optNumber.forEach(key => {
+      const v: any = (drink as any)[key];
+      if (typeof v !== 'undefined' && (typeof v !== 'number' || !isFinite(v) || v < 0)) {
+        result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): ${String(key)} must be a non-negative number`);
+        result.success = false;
+      }
+    });
+    if (typeof drink.tags !== 'undefined' && (!Array.isArray(drink.tags) || !drink.tags.every(t => typeof t === 'string'))) {
+      result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): tags must be an array of strings`);
+      result.success = false;
+    }
+    if (typeof drink.origin !== 'undefined') {
+      const o: any = drink.origin;
+      if (typeof o !== 'object' || o === null) {
+        result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): origin must be an object`);
+        result.success = false;
+      } else {
+        if (typeof o.country !== 'undefined' && typeof o.country !== 'string') {
+          result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): origin.country must be a string`);
+          result.success = false;
+        }
+        if (typeof o.city !== 'undefined' && o.city !== null && typeof o.city !== 'string') {
+          result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): origin.city must be a string or null`);
+          result.success = false;
+        }
+        if (typeof o.year !== 'undefined' && o.year !== null && (typeof o.year !== 'number' || !Number.isInteger(o.year))) {
+          result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): origin.year must be an integer or null`);
+          result.success = false;
+        }
+        if (typeof o.creator !== 'undefined' && o.creator !== null && typeof o.creator !== 'string') {
+          result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): origin.creator must be a string or null`);
+          result.success = false;
+        }
+      }
+    }
+    if (typeof drink.sources !== 'undefined' && (!Array.isArray(drink.sources) || !drink.sources.every(s => typeof s === 'string'))) {
+      result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): sources must be an array of strings`);
+      result.success = false;
+    }
+    if (typeof drink.relatedDrinkIds !== 'undefined' && (!Array.isArray(drink.relatedDrinkIds) || !drink.relatedDrinkIds.every(s => typeof s === 'string'))) {
+      result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): relatedDrinkIds must be an array of strings`);
+      result.success = false;
+    }
+    const optBool: Array<keyof DrinkEntry> = ['isIBAOfficial','isMocktail'];
+    optBool.forEach(key => {
+      const v: any = (drink as any)[key];
+      if (typeof v !== 'undefined' && typeof v !== 'boolean') {
+        result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): ${String(key)} must be a boolean`);
+        result.success = false;
+      }
+    });
+    if (typeof drink.garnish !== 'undefined') {
+      if (!Array.isArray(drink.garnish)) {
+        result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): garnish must be an array`);
+        result.success = false;
+      } else {
+        drink.garnish.forEach((g, gi) => {
+          if (!g || typeof g.name !== 'string' || !g.name.trim()) {
+            result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): garnish[${gi}].name must be a non-empty string`);
+            result.success = false;
+          }
+          if (typeof (g as any).prep !== 'undefined' && typeof (g as any).prep !== 'string') {
+            result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): garnish[${gi}].prep must be a string`);
+            result.success = false;
+          }
+        });
+      }
+    }
+    if (typeof drink.dominantColors !== 'undefined') {
+      if (!Array.isArray(drink.dominantColors) || !drink.dominantColors.every(c => typeof c === 'string')) {
+        result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): dominantColors must be an array of strings`);
         result.success = false;
       }
     }
