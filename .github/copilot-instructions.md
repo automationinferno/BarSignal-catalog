@@ -23,6 +23,6 @@ There is currently **no lint script** and **no formal test runner / single-test 
 
 - Keep `drinks.json` and the file system in sync. If a drink image or thumbnail path changes, update the JSON entry and regenerate thumbnails before considering the change complete.
 - Drink IDs are lowercase `snake_case` and are expected to line up with image filenames. Example: `old_fashioned` maps to `drinks/old_fashioned.png`, `drinks/_thumbs/old_fashioned_512.png`, and `drinks/_thumbs/old_fashioned_1024.png`.
-- The current catalog uses `imageVariants["512"]`, `imageVariants["1024"]`, and `thumb` (pointing to the 512px file). The validator still tolerates legacy `sm` / `md` keys, so preserve the existing numeric-key convention unless intentionally migrating the whole catalog and validator together.
+- The validator prefers `imageVariants.sm` and `imageVariants.md`. It still tolerates legacy numeric keys like `imageVariants["512"]` and `imageVariants["1024"]`; note that the current `drinks.json` also still uses those numeric keys plus `thumb` (pointing to the 512px file).
 - `modifiersSupported` is intentionally flexible in this repo: it may be either `boolean` or `string[]`. Do not narrow that field in data or code without updating both sides together.
 - `flags.json` is optional, but when present it is expected to stay as a flat JSON object for lightweight catalog-wide runtime flags such as `forceTextOnly` and `catalogVersion`.
