@@ -31,7 +31,7 @@ Ensure catalog changes are ready to merge by running the repository validation c
 
 Completion criteria are the exit condition for this workflow.
 
-1. Read current context by running `git diff --name-only HEAD` to identify changed files. If git context is unavailable, use the files explicitly named by the user.
+1. Read current context by identifying changed files with a PR/base-aware diff. When the target branch is available, diff `HEAD` against the merge base with that branch (for example, `git diff --name-only $(git merge-base HEAD origin/main) HEAD`, using the actual PR target branch when known). Only if base-branch context is unavailable should you fall back to local working tree detection with `git diff --name-only HEAD`. If git context is unavailable, use the files explicitly named by the user.
 2. Confirm that `package.json` contains `validate` and `validate:strict` scripts.
 3. Run `npm run validate`.
 4. Run `npm run validate:strict`.
