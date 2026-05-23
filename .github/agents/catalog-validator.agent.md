@@ -37,7 +37,7 @@ Completion criteria are the exit condition for this workflow.
 4. Run `npm run validate:strict`.
 5. If a command fails because of invalid or malformed data inside `drinks.json` or `flags.json`, or because a referenced file under `drinks/**/*` is missing, report the failure and repair only that failure.
 6. If a command fails because of a missing dependency, broken script, or environment issue, stop and report the error without making changes.
-7. Repeat steps 3-5 for at most 3 total validation attempts. If both commands still do not exit 0 after the third attempt, stop editing and report each failed attempt and the remaining error.
+7. After a repair, make at most 3 total validation attempts. Re-run both `npm run validate` and `npm run validate:strict` if `drinks.json` or `flags.json` changed. If `npm run validate` previously passed and the repair changed only referenced files under `drinks/**/*`, re-run only `npm run validate:strict`. If the required command(s) still do not exit 0 after the third attempt, stop editing and report each failed attempt and the remaining error.
 8. Return a concise completion report.
 
 ## Completion criteria
