@@ -1,10 +1,3 @@
-Absolutely 👍 — here’s a copy-and-paste-ready prompt for GitHub Copilot Chat inside your `barsignal-catalog` repo.
-This is the twin of your BarSignal-app context prompt, focused entirely on the catalog repo so Copilot knows how to build and maintain it.
-
----
-
-### 🧭 Prompt for Copilot Chat (inside the `barsignal-catalog` repo)
-
 ```text
 You are helping me build and maintain a public GitHub repository called **barsignal-catalog**.
 
