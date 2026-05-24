@@ -944,7 +944,7 @@
       { "name": "Simple Syrup", "amount": 15, "unit": "ml" },
       { "name": "Soda Water", "amount": 60, "unit": "ml" }
     ],
-    "technique": "build",
+    "technique": "shake",
     "glass": "highball",
     "ice": "cubed",
     "garnish": [{ "name": "Lemon slice" }, { "name": "Maraschino cherry" }],
