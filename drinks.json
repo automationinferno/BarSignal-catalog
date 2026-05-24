@@ -987,7 +987,7 @@
       { "name": "Simple Syrup", "amount": 12.5, "unit": "ml" },
       { "name": "Blackberry Liqueur", "amount": 15, "unit": "ml" }
     ],
-    "technique": "build",
+    "technique": "shake",
     "glass": "rocks",
     "ice": "crushed",
     "garnish": [{ "name": "Fresh blackberries" }, { "name": "Lemon slice" }],
