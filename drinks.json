@@ -309,7 +309,7 @@
       { "name": "Simple Syrup", "amount": 10, "unit": "ml" },
       { "name": "Cola", "amount": 30, "unit": "ml" }
     ],
-    "technique": "build",
+    "technique": "shake",
     "glass": "highball",
     "ice": "cubed",
     "garnish": [{ "name": "Lemon wedge" }],
