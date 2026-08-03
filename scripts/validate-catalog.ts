@@ -10,6 +10,7 @@ interface DrinkEntry {
   popularity: number;
   aliases?: string[];
   imagePath: string;
+  imageSource?: string;
   imageVariants: {
     [key: string]: string;
   };
@@ -151,6 +152,14 @@ function validateCatalog(): ValidationResult {
       }
       if (!/\.(png)$/i.test(drink.imagePath)) {
         result.warnings?.push(`${drinkPrefix} (${drink.id || 'unknown id'}): imagePath should be a .png file for consistency`);
+      }
+    }
+
+    // Validate optional provenance for externally supplied images.
+    if (typeof drink.imageSource !== 'undefined') {
+      if (typeof drink.imageSource !== 'string' || !/^https?:\/\//i.test(drink.imageSource)) {
+        result.errors.push(`${drinkPrefix} (${drink.id || 'unknown id'}): imageSource must be an absolute http(s) URL`);
+        result.success = false;
       }
     }
 

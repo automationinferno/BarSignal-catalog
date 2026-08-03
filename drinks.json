@@ -34,6 +34,7 @@
     "isIBAOfficial": true,
     "isMocktail": false,
     "imagePath": "drinks/old_fashioned.png",
+    "imageSource": "https://github.com/moralerr/Hey-Bartender/blob/main/app/src/main/res/mipmap-xxxhdpi/old_fashioned.jpg",
     "imageVariants": {
       "512": "drinks/_thumbs/old_fashioned_512.png",
       "1024": "drinks/_thumbs/old_fashioned_1024.png",
@@ -75,6 +76,7 @@
     "isIBAOfficial": true,
     "isMocktail": false,
     "imagePath": "drinks/manhattan.png",
+    "imageSource": "https://github.com/moralerr/Hey-Bartender/blob/main/app/src/main/res/mipmap-xxxhdpi/manhattan.jpg",
     "imageVariants": {
       "512": "drinks/_thumbs/manhattan_512.png",
       "1024": "drinks/_thumbs/manhattan_1024.png",
@@ -117,6 +119,7 @@
     "isIBAOfficial": true,
     "isMocktail": false,
     "imagePath": "drinks/martini.png",
+    "imageSource": "https://github.com/moralerr/Hey-Bartender/blob/main/app/src/main/res/mipmap-xxxhdpi/martini.jpg",
     "imageVariants": {
       "512": "drinks/_thumbs/martini_512.png",
       "1024": "drinks/_thumbs/martini_1024.png",
@@ -160,6 +163,7 @@
     "isIBAOfficial": true,
     "isMocktail": false,
     "imagePath": "drinks/mojito.png",
+    "imageSource": "https://github.com/moralerr/Hey-Bartender/blob/main/app/src/main/res/mipmap-xxxhdpi/mojito.jpg",
     "imageVariants": {
       "512": "drinks/_thumbs/mojito_512.png",
       "1024": "drinks/_thumbs/mojito_1024.png",
@@ -201,6 +205,7 @@
     "isIBAOfficial": true,
     "isMocktail": false,
     "imagePath": "drinks/margarita.png",
+    "imageSource": "https://github.com/moralerr/Hey-Bartender/blob/main/app/src/main/res/mipmap-xxxhdpi/margarita.jpg",
     "imageVariants": {
       "512": "drinks/_thumbs/margarita_512.png",
       "1024": "drinks/_thumbs/margarita_1024.png",
