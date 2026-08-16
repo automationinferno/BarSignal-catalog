@@ -1,0 +1,4 @@
+interface:
+  display_name: "BarSignal Drink Cards"
+  short_description: "Generate consistent drink image cards"
+  default_prompt: "Use $create-drink-cards to add or replace BarSignal drink artwork."
