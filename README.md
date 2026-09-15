@@ -3,9 +3,37 @@ Catalog of drinks for BarSignal
 
 ## Privacy Policy
 
-The canonical BarSignal privacy policy is located at
-[`docs/privacy-policy.md`](docs/privacy-policy.md) and is served via jsDelivr at:
-`https://cdn.jsdelivr.net/gh/automationinferno/BarSignal-catalog@main/docs/privacy-policy.md`
+The browser-friendly policy is [`docs/privacy-policy.html`](docs/privacy-policy.html).
+Its intended public URL after GitHub Pages deployment is:
 
-This URL is wired into the BarSignal app's Settings → Privacy Policy link and
-the Google Play Console privacy policy field.
+https://automationinferno.github.io/BarSignal-catalog/privacy-policy.html
+
+The BarSignal app URL change is prepared separately. Do not release it or
+change the Play Console privacy-policy field until the page is live and verified.
+
+### Publishing
+
+1. Merge the catalog changes into `main`.
+2. In GitHub, open **Settings / Pages / Build and deployment**.
+3. Select **Deploy from a branch**, branch `main`, and folder `/docs`.
+4. Wait for the Pages deployment to succeed. Verify the URL above returns
+   HTTP 200 with `Content-Type: text/html` and opens correctly on a phone.
+5. Update **Play Console / Policy / App content / Privacy policy**, then
+   merge and release the app URL change.
+
+`docs/.nojekyll` makes Pages serve the files as-is, without a Jekyll build.
+No custom workflow, JavaScript, external fonts, or analytics are needed for the page.
+The drink catalog and image URLs continue using jsDelivr unchanged.
+
+### Maintaining the policy
+
+[`docs/privacy-policy.md`](docs/privacy-policy.md) is the editable policy source
+and fallback for older app versions, which still open:
+
+https://cdn.jsdelivr.net/gh/automationinferno/BarSignal-catalog@main/docs/privacy-policy.md
+
+Keep this path available. It does not automatically redirect to the HTML page.
+The HTML is currently maintained manually; update both documents together,
+including the last-updated date when the policy changes. Prefer stacked
+headings and paragraphs over tables, and check phone widths, enlarged text,
+light/dark mode, and links before publishing.

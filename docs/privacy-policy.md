@@ -13,12 +13,26 @@ information (PII) to us or to any third-party service we control.
 
 The App processes the following information **exclusively on your device**:
 
-| Category | Details | Purpose |
-|---|---|---|
-| **Favorites & settings** | Your favorite drinks, theme preference (light/dark/auto), haptic-feedback toggle, high-contrast toggle, and text-only toggle. | Persist your preferences across app launches. |
-| **Drink catalog cache** | A local copy of the drink catalog (names, ingredients, steps, image URLs). | Enable offline use and reduce network requests. |
-| **Image disk cache** | Cached drink images downloaded from the catalog CDN. | Improve load performance and support offline browsing. |
-| **Ad-frequency counter** | A counter that tracks how many drink selections you have made, used to decide when to show an opt-in interstitial ad. | Respect ad-frequency caps without collecting any personal data. |
+### Favorites & settings
+
+Your favorite drinks, theme preference (light/dark/auto), haptic-feedback toggle,
+high-contrast toggle, and text-only toggle are stored to persist your preferences
+across app launches.
+
+### Drink catalog cache
+
+A local copy of the drink catalog (names, ingredients, steps, and image URLs) is
+stored to enable offline use and reduce network requests.
+
+### Image disk cache
+
+Cached drink images downloaded from the catalog CDN are stored to improve load
+performance and support offline browsing.
+
+### Ad-frequency counter
+
+A counter tracks how many drink selections you have made. It is used to decide
+when to show an opt-in interstitial ad and does not collect personal data.
 
 All of the above data is stored locally using the standard device storage APIs
 (AsyncStorage and the Expo/React Native file-system cache). **It never leaves
@@ -53,10 +67,15 @@ handled directly between Google and your device.
 
 The App makes network requests to the following third-party services:
 
-| Service | Purpose | Data transmitted |
-|---|---|---|
-| **jsDelivr CDN** (`cdn.jsdelivr.net`) | Fetch the drink catalog JSON and drink images | None — standard HTTP requests |
-| **Google AdMob** | Serve interstitial ads and manage consent | Advertising ID, IP address (see above) |
+### jsDelivr CDN (`cdn.jsdelivr.net`)
+
+- **Purpose:** Fetch the drink catalog JSON and drink images.
+- **Data transmitted:** None beyond standard HTTP requests.
+
+### Google AdMob
+
+- **Purpose:** Serve interstitial ads and manage consent.
+- **Data transmitted:** Advertising ID and IP address, as described above.
 
 ## Data retention & deletion
 
