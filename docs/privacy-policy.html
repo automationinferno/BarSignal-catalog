@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Privacy Policy for BarSignal">
+    <title>Privacy Policy for BarSignal</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --background: #f6f7f9;
+        --surface: #ffffff;
+        --text: #1d2430;
+        --muted: #596579;
+        --border: #d9dee7;
+        --accent: #8b2f45;
+        --accent-soft: #f7e9ed;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --background: #14171c;
+          --surface: #20252d;
+          --text: #f0f2f5;
+          --muted: #b4bdca;
+          --border: #3a424f;
+          --accent: #f09ab0;
+          --accent-soft: #3b2730;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        overflow-wrap: anywhere;
+        background: var(--background);
+        color: var(--text);
+        font: 1rem/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      main {
+        width: min(100% - 2rem, 48rem);
+        margin: 0 auto;
+        padding: 3rem 0 4rem;
+      }
+
+      header,
+      section,
+      footer {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 0.9rem;
+        padding: 1.5rem;
+      }
+
+      header {
+        border-top: 0.35rem solid var(--accent);
+        margin-bottom: 1.25rem;
+      }
+
+      section {
+        margin-top: 1.25rem;
+      }
+
+      footer {
+        margin-top: 1.25rem;
+      }
+
+      h1,
+      h2,
+      h3 {
+        line-height: 1.25;
+        margin-top: 0;
+      }
+
+      h1 {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        margin-bottom: 0.65rem;
+      }
+
+      h2 {
+        color: var(--accent);
+        font-size: 1.35rem;
+        margin-bottom: 1rem;
+      }
+
+      h3 {
+        font-size: 1.05rem;
+        margin-bottom: 0.35rem;
+      }
+
+      p,
+      ul {
+        margin: 0 0 1rem;
+      }
+
+      p:last-child,
+      ul:last-child {
+        margin-bottom: 0;
+      }
+
+      a {
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      a:focus-visible {
+        outline: 0.2rem solid var(--accent);
+        outline-offset: 0.2rem;
+      }
+
+      .updated {
+        color: var(--muted);
+        margin-bottom: 0;
+      }
+
+      .notice {
+        background: var(--accent-soft);
+        border-left: 0.3rem solid var(--accent);
+        border-radius: 0.35rem;
+        margin: 1.25rem 0 0;
+        padding: 0.9rem 1rem;
+      }
+
+      .data-item {
+        border-top: 1px solid var(--border);
+        padding: 1rem 0;
+      }
+
+      .data-item:first-of-type {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .data-item:last-of-type {
+        padding-bottom: 0;
+      }
+
+      @media (max-width: 36rem) {
+        main {
+          width: min(100% - 1rem, 48rem);
+          padding: 1rem 0 2rem;
+        }
+
+        header,
+        section,
+        footer {
+          border-radius: 0.65rem;
+          padding: 1.15rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Privacy Policy for BarSignal</h1>
+        <p class="updated"><strong>Last updated:</strong> 2026-09-09</p>
+        <p class="notice">BarSignal is designed to be a lightweight, offline-capable drink-reference tool. We do not collect, store, or transmit personally identifiable information to us or to any third-party service we control.</p>
+      </header>
+
+      <section>
+        <h2>Information the App processes</h2>
+        <p>BarSignal (“the App”) is provided by automationinferno (“we,” “us,” or “our”). This Privacy Policy explains how the App handles information when you use it.</p>
+        <p>The App processes the following information <strong>exclusively on your device</strong>:</p>
+
+        <article class="data-item">
+          <h3>Favorites &amp; settings</h3>
+          <p>Your favorite drinks, theme preference (light/dark/auto), haptic-feedback toggle, high-contrast toggle, and text-only toggle are stored to persist your preferences across app launches.</p>
+        </article>
+        <article class="data-item">
+          <h3>Drink catalog cache</h3>
+          <p>A local copy of the drink catalog (names, ingredients, steps, and image URLs) is stored to enable offline use and reduce network requests.</p>
+        </article>
+        <article class="data-item">
+          <h3>Image disk cache</h3>
+          <p>Cached drink images downloaded from the catalog CDN are stored to improve load performance and support offline browsing.</p>
+        </article>
+        <article class="data-item">
+          <h3>Ad-frequency counter</h3>
+          <p>A counter tracks how many drink selections you have made. It is used to decide when to show an opt-in interstitial ad and does not collect personal data.</p>
+        </article>
+
+        <p class="notice">All of the above data is stored locally using standard device storage APIs (AsyncStorage and the Expo/React Native file-system cache). <strong>It never leaves your device</strong> unless you choose to clear it from the Settings screen.</p>
+      </section>
+
+      <section>
+        <h2>Advertising &amp; Google AdMob</h2>
+        <p>BarSignal displays <strong>interstitial advertisements</strong> served by Google AdMob. AdMob may collect and use the following data in accordance with its own <a href="https://policies.google.com/privacy">Privacy Policy</a>:</p>
+        <ul>
+          <li><strong>Device advertising identifier</strong> (AAID on Android / IDFA on iOS)</li>
+          <li><strong>IP address</strong> (used for geo-targeting and fraud prevention)</li>
+          <li><strong>App interaction data</strong> (ad views and clicks) for measurement and reporting</li>
+        </ul>
+        <p>We use Google's <strong>User Messaging Platform (UMP)</strong> to obtain your consent for personalized advertising in regions where it is required by law (e.g. EEA, UK, California). When the consent form is presented, you can:</p>
+        <ul>
+          <li><strong>Consent</strong> to personalized ads</li>
+          <li><strong>Decline</strong> and receive non-personalized ads instead</li>
+          <li><strong>Manage</strong> your choices at any time via <strong>Settings → Privacy Choices</strong></li>
+        </ul>
+        <p>If you decline personalized ads, AdMob still serves ads but does not use your advertising identifier for personalization.</p>
+        <p>We do not receive, store, or have access to your advertising identifier, consent string, or any raw AdMob data. All ad-related data processing is handled directly between Google and your device.</p>
+      </section>
+
+      <section>
+        <h2>Third-party services</h2>
+        <p>The App makes network requests to the following third-party services:</p>
+        <article class="data-item">
+          <h3>jsDelivr CDN (<code>cdn.jsdelivr.net</code>)</h3>
+          <p><strong>Purpose:</strong> Fetch the drink catalog JSON and drink images.</p>
+          <p><strong>Data transmitted:</strong> None beyond standard HTTP requests.</p>
+        </article>
+        <article class="data-item">
+          <h3>Google AdMob</h3>
+          <p><strong>Purpose:</strong> Serve interstitial ads and manage consent.</p>
+          <p><strong>Data transmitted:</strong> Advertising ID and IP address, as described above.</p>
+        </article>
+      </section>
+
+      <section>
+        <h2>Data retention &amp; deletion</h2>
+        <p>All locally stored data (favorites, settings, catalog cache, image cache, and ad-frequency counter) can be cleared at any time from <strong>Settings</strong>:</p>
+        <ul>
+          <li><strong>Clear Catalog Cache</strong> — removes the cached drink catalog</li>
+          <li><strong>Clear Image Cache</strong> — removes cached drink images</li>
+        </ul>
+        <p>Uninstalling the App removes all locally stored data permanently.</p>
+      </section>
+
+      <section>
+        <h2>Children's privacy</h2>
+        <p>BarSignal is not directed at children under the age of 13 (or the applicable age of digital consent in your region). We do not knowingly collect personal information from children.</p>
+      </section>
+
+      <section>
+        <h2>Changes to this policy</h2>
+        <p>We may update this Privacy Policy from time to time. Changes will be posted at this URL and the “Last updated” date will be revised. Significant changes may be communicated through the App or the Play Store listing.</p>
+      </section>
+
+      <footer>
+        <h2>Contact</h2>
+        <p>If you have questions about this Privacy Policy, please <a href="https://github.com/automationinferno/BarSignal/issues">open an issue on GitHub</a> or contact us at the email address listed on the Play Store listing.</p>
+      </footer>
+    </main>
+  </body>
+</html>
