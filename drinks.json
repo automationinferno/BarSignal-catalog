@@ -5188,12 +5188,11 @@
 },
 {
   "id": "adios_motherfucker",
-  "name": "Adios Motherfucker",
+  "name": "Adios MF",
   "category": "Highball",
   "popularity": 81,
   "aliases": [
-    "AMF",
-    "Adios MF"
+    "AMF"
   ],
   "modifiersSupported": [
     "blue_curacao",

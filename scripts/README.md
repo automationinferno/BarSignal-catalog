@@ -83,7 +83,8 @@ npm run build:site
 # Offline check only (Node built-ins, no install needed)
 npm run check:site
 
-# Unit tests: every test file under scripts/ (node --test scripts/)
+# Tests: every test file under scripts/ (node --test scripts/):
+# build-site.test.js and catalog-content.test.js (explicit-word guard on drink names and aliases)
 npm test
 ```
 

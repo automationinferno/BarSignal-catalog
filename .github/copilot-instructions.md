@@ -11,10 +11,10 @@
 - Generate 1×1 placeholder PNGs at `drinks/<drink_id>.png` (overwriting existing files): `npm run placeholders -- <drink_id> [more_ids...]`. `npm run build:site` refuses them (sources must be square PNGs of at least 1024×1024 px), so placeholders can never be published.
 - Build the GitHub Pages site under `docs/` (encode missing WebP images, update `docs/v1/drinks.json`, then run the site check; needs sharp from `npm ci`): `npm run build:site`
 - Check the Pages site offline (Node built-ins only, no install needed): `npm run check:site`
-- Run every test file under `scripts/` (today only `scripts/build-site.test.js`): `npm test`
+- Run every test file under `scripts/` (`scripts/build-site.test.js` and `scripts/catalog-content.test.js`): `npm test`
 - Run a single test by name: `node --test --test-name-pattern="<test name>" scripts/build-site.test.js`
 
-There is currently **no lint script**. `npm test` (`node --test scripts/`) runs every test file under `scripts/` with Node's built-in `node:test` runner; today only `scripts/build-site.js` has tests. The validator scripts and `npm run check:site` are the main safety checks for this repo. `.github/workflows/check-site.yml` runs `npm test`, `npm run validate:strict` and `npm run check:site` on every pull request and on pushes to `main`; on pull requests it first fails if the PR deletes, modifies, renames or changes the type of any existing file under `docs/img/` (compared with the PR base).
+There is currently **no lint script**. `npm test` (`node --test scripts/`) runs every test file under `scripts/` with Node's built-in `node:test` runner; `scripts/build-site.test.js` covers `scripts/build-site.js`, and `scripts/catalog-content.test.js` fails if any drink `name` or `aliases` entry in `drinks.json` or `docs/v1/drinks.json` matches an explicit-word deny list. The validator scripts and `npm run check:site` are the main safety checks for this repo. `.github/workflows/check-site.yml` runs `npm test`, `npm run validate:strict` and `npm run check:site` on every pull request and on pushes to `main`; on pull requests it first fails if the PR deletes, modifies, renames or changes the type of any existing file under `docs/img/` (compared with the PR base).
 
 ## High-level architecture
 
@@ -28,6 +28,7 @@ There is currently **no lint script**. `npm test` (`node --test scripts/`) runs 
 
 - Keep `drinks.json` and the file system in sync. If a drink image or thumbnail path changes, update the JSON entry and regenerate thumbnails before considering the change complete. After any `drinks.json` or source-image change, also run `npm run build:site` and commit the `docs/` changes.
 - Pages site images are append-only, and `check-site.yml` enforces it for all of `docs/img/` on pull requests (direct pushes to `main` are not checked): never rename, overwrite or delete files in `docs/img/v1/` (released app builds may still reference them). Never hand-edit `docs/v1/drinks.json`, and never delete `docs/.nojekyll`.
+- The app shows `aliases` on screen ("Also known as: …") and uses `name` as the display name, so never put explicit text in either. IDs and image file names are permanent (changing them would break released builds and favorites): a drink renamed for display keeps its original id.
 - Drink IDs are lowercase `snake_case` and are expected to line up with image filenames. Example: `old_fashioned` maps to `drinks/old_fashioned.png`, `drinks/_thumbs/old_fashioned_512.png`, and `drinks/_thumbs/old_fashioned_1024.png`.
 - The validator prefers `imageVariants.sm` and `imageVariants.md`. It still tolerates legacy numeric keys like `imageVariants["512"]` and `imageVariants["1024"]`; note that the current `drinks.json` also still uses those numeric keys plus `thumb` (pointing to the 512px file). `npm run build:site` maps only `512`, `1024` and `thumb` and fails on any other key, so switching keys also needs a `scripts/build-site.js` change.
 - `modifiersSupported` is intentionally flexible in this repo: it may be either `boolean` or `string[]`. Do not narrow that field in data or code without updating both sides together.
