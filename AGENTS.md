@@ -17,12 +17,13 @@
 | `npm run placeholders -- <id> [more...]` | Write 1×1 placeholder PNGs to `drinks/<id>.png` (overwriting existing files). `build:site` needs square PNG originals of at least 1024×1024 px and refuses these, so they can't be published |
 | `npm run build:site` | Encode missing WebP images into `docs/img/v1/`, update `docs/v1/drinks.json`, then run the site check (needs sharp from `npm ci`) |
 | `npm run check:site` | Offline check of the Pages site in `docs/`: required files, drift from `drinks.json`, names, hashes, size budgets (never loads sharp) |
-| `npm test` | `node --test scripts/`: runs every test file under `scripts/` with Node's built-in runner (today only `build-site.test.js`) |
+| `npm test` | `node --test scripts/`: runs every test file under `scripts/` with Node's built-in runner (`build-site.test.js` and `catalog-content.test.js`) |
 
-There is **no linter**, and only `scripts/build-site.js` has tests today. The validator scripts and `check:site` are the safety gate: `.github/workflows/check-site.yml` runs `npm test`, `validate:strict` and `check:site` on every PR and on pushes to `main`, and on PRs it also fails if an existing file under `docs/img/` is deleted, modified, renamed or changes type.
+There is **no linter**. Tests exist for `scripts/build-site.js` (`build-site.test.js`) and for catalog display text (`catalog-content.test.js`: every drink `name` and `aliases` entry in `drinks.json` and `docs/v1/drinks.json` must pass an explicit-word deny list, so adding such a name or alias fails CI). The validator scripts and `check:site` are the safety gate: `.github/workflows/check-site.yml` runs `npm test`, `validate:strict` and `check:site` on every PR and on pushes to `main`, and on PRs it also fails if an existing file under `docs/img/` is deleted, modified, renamed or changes type.
 
 ## Key conventions
 
+- **Display text stays clean** — the app shows `aliases` on screen ("Also known as: …") and uses `name` as the display name, so never put explicit text in either (`scripts/catalog-content.test.js` enforces this). IDs and image file names are permanent (changing them would break released builds and favorites), so a drink renamed for display keeps its original id (e.g. `adios_motherfucker` is displayed as "Adios MF").
 - **IDs** — lowercase `snake_case`, must match image filenames (e.g. `old_fashioned` → `drinks/old_fashioned.png`)
 - **Image paths** — main images under `drinks/`, thumbnails under `drinks/_thumbs/`. All `.png`.
 - **`imageVariants`** — accepts both `{sm, md}` and legacy `{512, 1024, thumb}` keys. The current data uses numeric keys; do not rewrite them without coordinating with the app.
