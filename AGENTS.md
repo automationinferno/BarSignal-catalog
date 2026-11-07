@@ -14,9 +14,12 @@
 | `npm run type-check` | TypeScript `--noEmit` — the closest thing to a typecheck pass |
 | `npm run build` | Compile TS → `dist/` (CommonJS, ES2022) |
 | `npm run thumbs` | Regenerate 512/1024 PNG thumbnails under `drinks/_thumbs/` via Sharp |
-| `npm run placeholders -- <id> [more...]` | Generate placeholder PNGs for specific drink IDs |
+| `npm run placeholders -- <id> [more...]` | Write 1×1 placeholder PNGs to `drinks/<id>.png` (overwriting existing files). `build:site` needs square PNG originals of at least 1024×1024 px and refuses these, so they can't be published |
+| `npm run build:site` | Encode missing WebP images into `docs/img/v1/`, update `docs/v1/drinks.json`, then run the site check (needs sharp from `npm ci`) |
+| `npm run check:site` | Offline check of the Pages site in `docs/`: required files, drift from `drinks.json`, names, hashes, size budgets (never loads sharp) |
+| `npm test` | `node --test scripts/`: runs every test file under `scripts/` with Node's built-in runner (today only `build-site.test.js`) |
 
-There is **no test runner** and **no linter**. The validator scripts are the safety gate.
+There is **no linter**, and only `scripts/build-site.js` has tests today. The validator scripts and `check:site` are the safety gate: `.github/workflows/check-site.yml` runs `npm test`, `validate:strict` and `check:site` on every PR and on pushes to `main`, and on PRs it also fails if an existing file under `docs/img/` is deleted, modified, renamed or changes type.
 
 ## Key conventions
 
@@ -26,8 +29,9 @@ There is **no test runner** and **no linter**. The validator scripts are the saf
 - **`modifiersSupported`** — can be `boolean` or `string[]`. Do not narrow.
 - **`flags.json`** — optional flat JSON (`forceTextOnly`, `catalogVersion`).
 - **`imageSource`** — optional provenance URL; validated for absolute http(s) format.
-- **Catalog is served via jsDelivr CDN** — paths must remain stable; the app joins a CDN base with relative paths from this repo.
+- **jsDelivr still serves released app builds** — builds released before the switch to the Pages site fetch the root `drinks.json` via jsDelivr (`@main`) and join that base with its relative paths, so root catalog and `drinks/` paths must remain stable. Builds with the switch read `docs/v1/drinks.json` from the Pages site.
 - **Thumbnails are CI‑generated** — `.github/workflows/build-thumbs.yml` runs on push to `main`, commits any changed thumbs back.
+- **Pages site (`docs/`) is generated** — Pages publishes `main:/docs`. `npm run build:site` derives `docs/v1/drinks.json` (only `imagePath`/`imageVariants` rewritten; only the `512`, `1024` and `thumb` keys are supported) and `docs/img/v1/<id>_<512|1024>.<hash8>.webp` from `drinks.json` and each source `imagePath` (not `_thumbs`). Rerun it after any `drinks.json` or source-image change and commit `docs/`. Outputs are append-only (CI enforces this for `docs/img/` on PRs, not on direct pushes): never rename, overwrite or delete files in `docs/img/v1/` (released app builds may still reference them) and never hand-edit `docs/v1/drinks.json`. Never delete `docs/.nojekyll`. Details: README › "Catalog site (GitHub Pages)".
 
 ## Git aliases (team convention)
 

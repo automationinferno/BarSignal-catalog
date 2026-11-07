@@ -15,7 +15,7 @@ Create catalog-ready drink cards that match the established BarSignal visual sys
 4. Generate one complete product on a professional, warm bar background: full bottle, can, glass, or package visible from edge to edge, no cropping, no sidebars, no borders, no hands, no extra products, and no footer or overlay text in the generated photo.
 5. Use `scripts/build-card.mjs` from this skill to compose the final card. It creates a 1254×1254 PNG with a 1254×980 photo region and a 274px solid-black footer. The footer uses the exact catalog name in uppercase, centered bold condensed white type. Do not ask image generation to render this footer.
 6. Visually inspect representative cards at full size. Regenerate any image with an incorrect brand, product variant, garbled label, cropped product, unreadable label, or inconsistent composition. For branded products, compare the generated package against its reference.
-7. Run `npm run thumbs`, `npm run validate:strict`, `npm run type-check`, and `npm run build`. Do not finish with missing referenced files, stale thumbnails, or unrelated catalog changes.
+7. Run `npm run thumbs`, `npm run build:site`, `npm run validate:strict`, `npm run type-check`, and `npm run build`, and include the generated `docs/` changes. `npm run build:site` refuses sources that are not PNGs or are smaller than 1024×1024 px, such as `npm run placeholders` output, so finish the full-size card from step 5 first. Do not finish with missing referenced files, stale thumbnails, a failing site check, deleted or modified `docs/img/v1/` files, or unrelated catalog changes.
 
 ## Card standards
 
