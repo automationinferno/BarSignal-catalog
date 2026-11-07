@@ -9,7 +9,10 @@
     "build": "tsc",
     "type-check": "tsc --noEmit",
     "thumbs": "node scripts/generate-thumbs.js",
-    "placeholders": "node scripts/generate-placeholders.js"
+    "placeholders": "node scripts/generate-placeholders.js",
+    "build:site": "node scripts/build-site.js",
+    "check:site": "node scripts/build-site.js --check",
+    "test": "node --test scripts/"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

@@ -1,0 +1,62 @@
+# Offline check of the GitHub Pages site under docs/ (published from main:/docs).
+name: Check Site
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-site:
+    name: Test and Check Site
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Deployment gate: released app builds reference every published image, so a PR may only add files
+      # under docs/img/. The depth-1 checkout lacks the base commit; fetch it anonymously (public repo).
+      - name: Fail if the PR changes existing site images
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin "$BASE_SHA"
+          changed="$(git diff --name-only --diff-filter=DMRT "$BASE_SHA" HEAD -- docs/img/)"
+          if [ -n "$changed" ]; then
+            echo "::error::docs/img/ is append-only, but this PR deletes, modifies, renames or retypes:"
+            printf '%s\n' "$changed"
+            exit 1
+          fi
+          echo "docs/img/ append-only check passed: no existing image was changed."
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '26'
+          cache: npm
+
+      # No step needs a package install script: tsx/esbuild resolve their prebuilt binaries without one.
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Validate root catalog and image files
+        run: npm run validate:strict
+
+      - name: Check Pages site in docs
+        run: npm run check:site

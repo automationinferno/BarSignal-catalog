@@ -16,12 +16,13 @@ Ensure catalog changes are ready to merge by running the repository validation c
 1. Run:
    - `npm run validate`
    - `npm run validate:strict`
-2. If either script is missing from `package.json`, stop immediately and report: `Script <name> not found in package.json. Cannot proceed. Please confirm the correct script name.`
-3. Treat the task as incomplete unless both commands pass.
+   - `npm run check:site`
+2. If any of these scripts is missing from `package.json`, stop immediately and report: `Script <name> not found in package.json. Cannot proceed. Please confirm the correct script name.`
+3. Treat the task as incomplete unless all three commands pass.
 4. If `npm run validate` passes but `npm run validate:strict` fails, report which strict rule failed before attempting any repair. Do not re-run `npm run validate` unless a catalog file changed.
 5. Repair only failures caused by invalid or malformed data inside `drinks.json` or `flags.json`, or by missing referenced assets under `drinks/**/*`.
 6. If the failure is caused by a missing dependency, broken script, Node or tooling mismatch, or any other environment issue, stop without making edits and report the error.
-7. If the required repair is outside the allowed file scope, stop without making edits and report that the repair needs user approval.
+7. If the required repair is outside the allowed file scope, stop without making edits and report that the repair needs user approval. This includes regenerating the GitHub Pages site under `docs/` (`docs/v1/drinks.json`, `docs/img/v1/`) with `npm run build:site`, which `npm run check:site` asks for when `docs/` is stale, for example after a repair changed `drinks.json` or a source image. Never hand-edit `docs/`.
 8. Report:
    - what failed
    - what changed
@@ -32,18 +33,19 @@ Ensure catalog changes are ready to merge by running the repository validation c
 Completion criteria are the exit condition for this workflow.
 
 1. Read current context by identifying changed files with a PR/base-aware diff. When the target branch is available, diff `HEAD` against the merge base with that branch (for example, `git diff --name-only $(git merge-base HEAD origin/main) HEAD`, using the actual PR target branch when known). Only if base-branch context is unavailable should you fall back to local working tree detection with `git diff --name-only HEAD`. If git context is unavailable, use the files explicitly named by the user.
-2. Confirm that `package.json` contains `validate` and `validate:strict` scripts.
+2. Confirm that `package.json` contains `validate`, `validate:strict`, and `check:site` scripts.
 3. Run `npm run validate`.
-4. Run `npm run validate:strict`.
+4. Run `npm run validate:strict`, then `npm run check:site`.
 5. If a command fails because of invalid or malformed data inside `drinks.json` or `flags.json`, or because a referenced file under `drinks/**/*` is missing, report the failure and repair only that failure.
 6. If a command fails because of a missing dependency, broken script, or environment issue, stop and report the error without making changes.
-7. After a repair, make at most 3 total validation attempts. Re-run both `npm run validate` and `npm run validate:strict` if `drinks.json` or `flags.json` changed. If `npm run validate` previously passed and the repair changed only referenced files under `drinks/**/*`, re-run only `npm run validate:strict`. If the required command(s) still do not exit 0 after the third attempt, stop editing and report each failed attempt and the remaining error.
+7. After a repair, make at most 3 total validation attempts. Re-run both `npm run validate` and `npm run validate:strict` if `drinks.json` or `flags.json` changed. If `npm run validate` previously passed and the repair changed only referenced files under `drinks/**/*`, re-run only `npm run validate:strict`. Re-run `npm run check:site` after every repair; if it reports that `docs/` is stale, stop and report that `npm run build:site` needs user approval. If the required command(s) still do not exit 0 after the third attempt, stop editing and report each failed attempt and the remaining error.
 8. Return a concise completion report.
 
 ## Completion criteria
 
 - `npm run validate` exits 0.
 - `npm run validate:strict` exits 0.
+- `npm run check:site` exits 0.
 - Only `drinks.json`, `flags.json`, or referenced files under `drinks/**/*` are edited.
 - Final response includes commands run and results.
 

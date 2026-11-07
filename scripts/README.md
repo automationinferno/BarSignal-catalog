@@ -62,6 +62,39 @@ Errors found:
 💥 Found 3 error(s)
 ```
 
+### `build-site.js`
+
+Builds and checks the GitHub Pages site under `docs/` (`docs/v1/drinks.json` and
+`docs/img/v1/*.webp`). See "Catalog site (GitHub Pages)" in the root `README.md` for the
+URL layout and the append-only rules.
+
+Every output must be exactly 512×512 or 1024×1024 px, so source images must be square
+PNGs of at least 1024×1024 px. Before encoding anything, the build refuses sources that
+are not PNGs or are smaller than a variant instead of upscaling them. The 1×1 PNGs that
+`generate-placeholders.js` (`npm run placeholders`) writes therefore make `build:site`
+fail; replace them with full-size cards before building the site.
+
+#### Usage
+
+```bash
+# Encode missing WebP images, update docs/v1/drinks.json, then run the check (needs sharp from npm ci)
+npm run build:site
+
+# Offline check only (Node built-ins, no install needed)
+npm run check:site
+
+# Unit tests: every test file under scripts/ (node --test scripts/)
+npm test
+```
+
+#### Exit Codes
+
+- **0**: Check passed
+- **1**: Check or build failed
+- **2**: Unknown argument
+
+It is plain CommonJS JavaScript, so `npm run type-check` does not cover it; `npm test` does.
+
 ## Development
 
 The validation script is written in TypeScript and can be:
