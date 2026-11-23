@@ -1,6 +1,6 @@
 # Privacy Policy for BarSignal
 
-**Last updated**: 2026-09-09
+**Last updated**: 2026-11-23
 
 BarSignal ("the App") is provided by automationinferno ("we," "us," or "our").
 This Privacy Policy explains how the App handles information when you use it.
@@ -15,9 +15,8 @@ The App processes the following information **exclusively on your device**:
 
 ### Favorites & settings
 
-Your favorite drinks, theme preference (light/dark/auto), haptic-feedback toggle,
-high-contrast toggle, and text-only toggle are stored to persist your preferences
-across app launches.
+Your favorite drinks and your app settings (theme preference and haptic
+feedback) are stored to persist your preferences across app launches.
 
 ### Drink catalog cache
 
@@ -26,8 +25,8 @@ stored to enable offline use and reduce network requests.
 
 ### Image disk cache
 
-Cached drink images downloaded from the catalog CDN are stored to improve load
-performance and support offline browsing.
+Cached drink images downloaded from the catalog site on GitHub Pages are stored
+to improve load performance and support offline browsing.
 
 ### Ad-frequency counter
 
@@ -54,7 +53,8 @@ California). When the consent form is presented, you can:
 
 - **Consent** to personalized ads
 - **Decline** and receive non-personalized ads instead
-- **Manage** your choices at any time via **Settings → Privacy Choices**
+- **Manage** your choices at any time via **Settings → Privacy Choices**, which
+  is shown in regions where privacy options are required
 
 If you decline personalized ads, AdMob still serves ads but does not use your
 advertising identifier for personalization.
@@ -67,10 +67,13 @@ handled directly between Google and your device.
 
 The App makes network requests to the following third-party services:
 
-### jsDelivr CDN (`cdn.jsdelivr.net`)
+### GitHub Pages (GitHub, Inc. — `automationinferno.github.io`)
 
 - **Purpose:** Fetch the drink catalog JSON and drink images.
-- **Data transmitted:** None beyond standard HTTP requests.
+- **Data transmitted:** Nothing beyond a standard HTTPS request: your device's
+  IP address and the HTTP headers such a request normally carries. The App sends
+  no account identifier, advertising identifier, or analytics data with these
+  requests.
 
 ### Google AdMob
 
@@ -89,9 +92,10 @@ Uninstalling the App removes all locally stored data permanently.
 
 ## Children's privacy
 
-BarSignal is not directed at children under the age of 13 (or the applicable
-age of digital consent in your region). We do not knowingly collect personal
-information from children.
+BarSignal describes alcoholic drinks and is intended for adults of legal
+drinking age; its Google Play target audience is 18 and older. It is not
+directed at children. We do not knowingly collect personal information from
+children, and the App transmits no personal information to us.
 
 ## Changes to this policy
 
