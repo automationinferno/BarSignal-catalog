@@ -1,10 +1,10 @@
 ```text
-You are helping me build and maintain a public GitHub repository called **barsignal-catalog**.
+You are helping me build and maintain a public GitHub repository called **drinkhud-catalog**.
 
 Purpose:
-- This repo stores and serves the **drink catalog** and **drink images** for the mobile app **BarSignal**.
-- The BarSignal app is a React Native (Expo) app that lets users in loud bars or clubs silently show bartenders what drink they want.
-- The app fetches `drinks.json` and related images from this repo through the **jsDelivr CDN**, so everything here must be public, well-structured, and easy for the app to consume.
+- This repo stores and serves the **drink catalog** and **drink images** for the mobile app **DrinkHUD**.
+- The DrinkHUD app is a React Native (Expo) app that lets users in loud bars or clubs silently show bartenders what drink they want.
+- The app fetches `drinks.json` and related images from this repo through its **GitHub Pages site**, so everything here must be public, well-structured, and easy for the app to consume.
 
 ---
 
@@ -12,7 +12,7 @@ Purpose:
 
 ```
 
-barsignal-catalog/
+drinkhud-catalog/
 drinks/
 margarita.png
 old_fashioned.png
@@ -58,11 +58,11 @@ Acceptance criteria:
 1. Every `id` is unique and in lowercase snake_case.
 2. `imagePath` and each `imageVariants` path point to existing files.
 3. All thumbnails are auto-generated via a GitHub Action using **Sharp**.
-4. The repo can be served publicly via jsDelivr, e.g.
+4. The repo is published publicly as a GitHub Pages site (`main:/docs`), e.g.
 
-   * `https://cdn.jsdelivr.net/gh/<user>/barsignal-catalog@main/drinks.json`
-   * `https://cdn.jsdelivr.net/gh/<user>/barsignal-catalog@main/drinks/_thumbs/margarita_1024.png`
-5. The **BarSignal app** joins those paths with its CDN base and must load images without modification.
+   * `https://automationinferno.github.io/DrinkHUD-catalog/v1/drinks.json`
+   * `https://automationinferno.github.io/DrinkHUD-catalog/img/v1/<id>_1024.<hash8>.webp`
+5. The **DrinkHUD app** joins those paths with its Pages base and must load images without modification.
 6. `scripts/validate-catalog.ts` ensures data consistency (unique ids, valid image paths, thumbs present).
 7. Optional `flags.json` defines global feature flags, e.g.:
 
@@ -89,7 +89,7 @@ This workflow:
 * All images (`drinks/*.png`) and thumbnails (`drinks/_thumbs/*`) exist and match JSON paths.
 * The CI workflow has successfully generated and committed the `_thumbs/` folder.
 * Validation passes with no missing files or duplicate IDs.
-* Everything can be fetched via jsDelivr without CORS or 404 issues.
+* Everything can be fetched from the Pages site without CORS or 404 issues.
 
 ---
 
@@ -101,19 +101,19 @@ This workflow:
    * `scripts/validate-catalog.ts` (Node + TypeScript script to check JSON and image consistency).
    * `.github/workflows/build-thumbs.yml` (Sharp-based thumbnail generator).
    * Optional `flags.json` with default values.
-2. Make sure all paths and JSON fields exactly match what the **BarSignal app** expects.
+2. Make sure all paths and JSON fields exactly match what the **DrinkHUD app** expects.
 3. Confirm that once committed, everything here can be loaded from
-   `https://cdn.jsdelivr.net/gh/<user>/barsignal-catalog@main/drinks.json`
+   `https://automationinferno.github.io/DrinkHUD-catalog/v1/drinks.json`
    and used by the app with no code changes.
 
-Use clean, TypeScript-friendly code and ensure this repo is production-ready as the public CDN source for the BarSignal mobile app.
+Use clean, TypeScript-friendly code and ensure this repo is production-ready as the public catalog and asset source for the DrinkHUD mobile app.
 
 ```
 
 ---
 
 ✅ Usage:
-1. Open your `barsignal-catalog` repo in VS Code.  
+1. Open your `drinkhud-catalog` repo in VS Code.  
 2. Open **Copilot Chat**, select **GPT-5** (or GPT-4.1).  
 3. Paste the prompt above.  
 4. Then ask follow-ups like:  
@@ -121,5 +121,5 @@ Use clean, TypeScript-friendly code and ensure this repo is production-ready as 
    - “Create `scripts/validate-catalog.ts` to verify the JSON and images.”  
    - “Seed a starter `drinks.json` with 50 classic cocktails.”  
 
-This will keep the catalog repo perfectly aligned with your BarSignal app’s expectations.
+This will keep the catalog repo perfectly aligned with your DrinkHUD app’s expectations.
 

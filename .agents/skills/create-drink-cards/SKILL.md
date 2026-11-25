@@ -1,11 +1,11 @@
 ---
 name: create-drink-cards
-description: Create or replace BarSignal drink image cards with consistent product photography, exact catalog names, manufacturer-faithful bottles or cans, and generated thumbnails. Use for requests to add, recreate, replace, expand, or improve drink artwork in this repository, especially beer, cocktail, bottle, can, or `_cat`-filtered catalog work.
+description: Create or replace DrinkHUD drink image cards with consistent product photography, exact catalog names, manufacturer-faithful bottles or cans, and generated thumbnails. Use for requests to add, recreate, replace, expand, or improve drink artwork in this repository, especially beer, cocktail, bottle, can, or `_cat`-filtered catalog work.
 ---
 
 # Create Drink Cards
 
-Create catalog-ready drink cards that match the established BarSignal visual system. Keep image generation focused on the product photo and compose the footer locally so the drink name is exact and readable.
+Create catalog-ready drink cards that match the established DrinkHUD visual system. Keep image generation focused on the product photo and compose the footer locally so the drink name is exact and readable.
 
 ## Workflow
 

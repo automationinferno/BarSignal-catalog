@@ -144,7 +144,7 @@ function readSiteCatalog(root) {
 // A throwaway catalog repo: root drinks.json, source PNGs and the privacy-policy files under docs/.
 // It lives in its own temp parent directory, so tests can also place files outside the repo.
 function makeRepo() {
-  const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'barsignal-site-'));
+  const parent = fs.mkdtempSync(path.join(os.tmpdir(), 'drinkhud-site-'));
   tempDirs.push(parent);
   const root = path.join(parent, 'repo');
   writeFile(root, 'drinks.json', `${JSON.stringify(ROOT_DRINKS, null, 2)}\n`);
