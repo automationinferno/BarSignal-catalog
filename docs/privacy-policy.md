@@ -1,13 +1,13 @@
-# Privacy Policy for BarSignal
+# Privacy Policy for DrinkHUD
 
-**Last updated**: 2026-11-23
+**Last updated**: 2026-11-25
 
-BarSignal ("the App") is provided by automationinferno ("we," "us," or "our").
+DrinkHUD ("the App") is provided by automationinferno ("we," "us," or "our").
 This Privacy Policy explains how the App handles information when you use it.
 
 ## Information the App processes
 
-BarSignal is designed to be a lightweight, offline-capable drink-reference tool.
+DrinkHUD is designed to be a lightweight, offline-capable drink-reference tool.
 It does **not** collect, store, or transmit any personally identifiable
 information (PII) to us or to any third-party service we control.
 
@@ -39,7 +39,7 @@ your device** unless you choose to clear it from the Settings screen.
 
 ## Advertising & Google AdMob
 
-BarSignal displays **interstitial advertisements** served by Google AdMob.
+DrinkHUD displays **interstitial advertisements** served by Google AdMob.
 AdMob may collect and use the following data in accordance with its own
 [Privacy Policy](https://policies.google.com/privacy):
 
@@ -92,7 +92,7 @@ Uninstalling the App removes all locally stored data permanently.
 
 ## Children's privacy
 
-BarSignal describes alcoholic drinks and is intended for adults of legal
+DrinkHUD describes alcoholic drinks and is intended for adults of legal
 drinking age; its Google Play target audience is 18 and older. It is not
 directed at children. We do not knowingly collect personal information from
 children, and the App transmits no personal information to us.
@@ -106,5 +106,5 @@ may be communicated through the App or the Play Store listing.
 ## Contact
 
 If you have questions about this Privacy Policy, please open an issue at
-[github.com/automationinferno/BarSignal](https://github.com/automationinferno/BarSignal)
+[github.com/automationinferno/DrinkHUD](https://github.com/automationinferno/DrinkHUD)
 or contact us at the email address listed on the Play Store listing.

@@ -1,6 +1,6 @@
-# BarSignal Catalog Validation
+# DrinkHUD Catalog Validation
 
-This directory contains scripts for validating the BarSignal cocktail catalog.
+This directory contains scripts for validating the DrinkHUD cocktail catalog.
 
 ## Scripts
 
@@ -42,7 +42,7 @@ npm run validate:strict
 
 **Success:**
 ```
-🍹 Validating BarSignal catalog...
+🍹 Validating DrinkHUD catalog...
 
 ✅ Catalog validation passed!
 📊 Validated 50 drink entries
@@ -50,7 +50,7 @@ npm run validate:strict
 
 **Failure:**
 ```
-🍹 Validating BarSignal catalog...
+🍹 Validating DrinkHUD catalog...
 
 ❌ Catalog validation failed!
 

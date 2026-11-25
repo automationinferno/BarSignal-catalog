@@ -1,24 +1,22 @@
-# BarSignal-catalog
-Catalog of drinks for BarSignal
+# DrinkHUD-catalog
+Catalog of drinks for DrinkHUD
 
 ## Privacy Policy
 
 The browser-friendly policy is [`docs/privacy-policy.html`](docs/privacy-policy.html).
-Its intended public URL after GitHub Pages deployment is:
+Its public URL is:
 
-https://automationinferno.github.io/BarSignal-catalog/privacy-policy.html
-
-The BarSignal app URL change is prepared separately. Do not release it or
-change the Play Console privacy-policy field until the page is live and verified.
+https://automationinferno.github.io/DrinkHUD-catalog/privacy-policy.html
 
 The canonical editable policy source remains
-[`docs/privacy-policy.md`](docs/privacy-policy.md), and older app links still
-open it via jsDelivr:
+[`docs/privacy-policy.md`](docs/privacy-policy.md), published alongside it at:
 
-https://cdn.jsdelivr.net/gh/automationinferno/BarSignal-catalog@main/docs/privacy-policy.md
+https://automationinferno.github.io/DrinkHUD-catalog/privacy-policy.md
 
-Keep this path available until the app and Play Console both point at the live
-HTML page.
+The repository was renamed from `BarSignal-catalog` on 2026-11-25, so the previous
+jsDelivr URLs keyed on the old name no longer resolve. Keep both policy files in
+`docs/` so the Pages URLs above stay available, and point the app and the Play Console
+privacy-policy field at the HTML page.
 
 ### Publishing
 
@@ -32,9 +30,11 @@ HTML page.
 
 `docs/.nojekyll` makes Pages serve the files as-is, without a Jekyll build.
 No custom workflow, JavaScript, external fonts, or analytics are needed for the page.
-App builds released before the switch to the [catalog site](#catalog-site-github-pages)
-keep loading the root `drinks.json` and its `drinks/` images through jsDelivr, so keep
-those paths stable.
+Builds released before the switch to the [catalog site](#catalog-site-github-pages)
+fetched the root `drinks.json` through jsDelivr on the old repository name, which stopped
+resolving when the repository was renamed; those builds fall back to their bundled
+catalog. Keep the root `drinks.json` and `drinks/` paths stable anyway: the generated
+Pages site is derived from them.
 
 ### Maintaining the policy
 
@@ -47,7 +47,7 @@ light/dark mode, and links before publishing.
 
 ## Catalog site (GitHub Pages)
 
-The same Pages site (`main:/docs`, https://automationinferno.github.io/BarSignal-catalog/)
+The same Pages site (`main:/docs`, https://automationinferno.github.io/DrinkHUD-catalog/)
 also serves a generated copy of the catalog and its images, so app builds that use it no
 longer depend on jsDelivr (jsDelivr intermittently returns HTTP 403 for this repository,
 which exceeds its 50 MB package limit). `scripts/build-site.js` generates it:

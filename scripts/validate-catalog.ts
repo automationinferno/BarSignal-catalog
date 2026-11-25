@@ -396,7 +396,7 @@ function validateCatalog(): ValidationResult {
 }
 
 function main(): void {
-  console.log('🍹 Validating BarSignal catalog...\n');
+  console.log('🍹 Validating DrinkHUD catalog...\n');
 
   const result = validateCatalog();
 

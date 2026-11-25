@@ -1,4 +1,4 @@
-# BarSignal-catalog — agent guide
+# DrinkHUD-catalog — agent guide
 
 ## Where to look first
 
@@ -30,7 +30,7 @@ There is **no linter**. Tests exist for `scripts/build-site.js` (`build-site.tes
 - **`modifiersSupported`** — can be `boolean` or `string[]`. Do not narrow.
 - **`flags.json`** — optional flat JSON (`forceTextOnly`, `catalogVersion`).
 - **`imageSource`** — optional provenance URL; validated for absolute http(s) format.
-- **jsDelivr still serves released app builds** — builds released before the switch to the Pages site fetch the root `drinks.json` via jsDelivr (`@main`) and join that base with its relative paths, so root catalog and `drinks/` paths must remain stable. Builds with the switch read `docs/v1/drinks.json` from the Pages site.
+- **jsDelivr no longer serves this repository** - the app reads `docs/v1/drinks.json` and `docs/img/v1/...` from the GitHub Pages site. Builds that predate the Pages switch used a jsDelivr path keyed on the old `BarSignal-catalog` name; that path stopped resolving when the repository was renamed, so those builds fall back to their bundled catalog. Keep the root `drinks.json` and `drinks/` paths stable anyway: the Pages site is generated from them.
 - **Thumbnails are CI‑generated** — `.github/workflows/build-thumbs.yml` runs on push to `main`, commits any changed thumbs back.
 - **Pages site (`docs/`) is generated** — Pages publishes `main:/docs`. `npm run build:site` derives `docs/v1/drinks.json` (only `imagePath`/`imageVariants` rewritten; only the `512`, `1024` and `thumb` keys are supported) and `docs/img/v1/<id>_<512|1024>.<hash8>.webp` from `drinks.json` and each source `imagePath` (not `_thumbs`). Rerun it after any `drinks.json` or source-image change and commit `docs/`. Outputs are append-only (CI enforces this for `docs/img/` on PRs, not on direct pushes): never rename, overwrite or delete files in `docs/img/v1/` (released app builds may still reference them) and never hand-edit `docs/v1/drinks.json`. Never delete `docs/.nojekyll`. Details: README › "Catalog site (GitHub Pages)".
 

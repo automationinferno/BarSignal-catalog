@@ -6,7 +6,7 @@
     npm run check:site   offline check only: Node built-ins, no install needed, never loads sharp
 
   Inputs (authoring source, never modified): drinks.json and the source image each drink's imagePath names.
-  Outputs, relative to the site root docs/ (https://automationinferno.github.io/BarSignal-catalog/):
+  Outputs, relative to the site root docs/ (https://automationinferno.github.io/DrinkHUD-catalog/):
     v1/drinks.json                        same schema as drinks.json; only imagePath and imageVariants change
     img/v1/<id>_<512|1024>.<hash8>.webp   WebP q85, effort 6, flattened; the 512 file backs imageVariants
                                           "512" and "thumb", the 1024 file backs "1024" and imagePath
